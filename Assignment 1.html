@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment Internet Programming</title>
+<style>
+	body{
+		background-color:#696963;
+	}
+	form{
+		background-color:#696969;
+	}
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    p {
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        align-items: center;
+    }
+
+    label {
+        text-align: right;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    .campus-group {
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+</head>
+<body>
+    <img src="assignment IP.png" alt="TVET UMPSA" width="400" height="450">
+    <p>To register, please fill in the form below with your desired course</p>
+	
+    <form class="form-grid">
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="matric">ID No.:</label>
+        <input type="text" id="matric" name="matric">
+
+        <label for="address">Current Address:</label>
+        <textarea id="address" name="address" rows="3"></textarea>
+
+        <label for="phone">Contact No.:</label>
+        <input type="text" id="phone" name="phone">
+
+        <label for="date">Training Date:</label>
+
+        <select id="date" onchange="updateCourses()">
+            <option value="">Select Date</option>
+
+            <option value="nov">
+                15 - 16 November 2025
+            </option>
+
+            <option value="dec">
+                13 - 14 December 2025
+            </option>
+        </select>
+
+        <label for="campus">Campus:</label>
+
+        <select id="campus" onchange="updateCourses()">
+
+            <option value="">
+                Select Campus
+            </option>
+
+            <option value="pekan">
+                Pekan
+            </option>
+
+            <option value="gambang">
+                Gambang
+            </option>
+        </select>
+
+        <label for="course">Available Course:</label>
+        <select id="course">
+            <option>
+                Select Course
+            </option>
+        </select>
+		
+		<input type="reset" value="Reset">
+		<input type="submit" value="Submit">
+    </form>
+<script>
+const courses = {
+
+    "nov-pekan": [
+        "Bosch Rexroth Automation",
+        "Mechanical Instrument Calibration",
+        "Design-Driven Stress Analysis"
+    ],
+
+    "nov-gambang": [
+        "Basic Lifting and Rigging",
+        "Survey Method in Construction"
+    ],
+
+    "dec-pekan": [
+        "Mobile Application Development",
+        "Steam Boiler Operation",
+        "CNC Milling Level 1"
+    ],
+
+    "dec-gambang": [
+        "Traffic Management",
+        "Basic Tools in Biochemical Laboratory"
+    ]
+};
+
+function updateCourses() {
+
+    let date =
+        document.getElementById("date").value;
+
+    let campus =
+        document.getElementById("campus").value;
+
+    let courseDropdown =
+        document.getElementById("course");
+
+    courseDropdown.innerHTML =
+        "<option>Select Course</option>";
+
+    let key = date + "-" + campus;
+
+    if (courses[key]) {
+
+        courses[key].forEach(function(course) {
+
+            let option =
+                document.createElement("option");
+
+            option.text = course;
+
+            option.value = course;
+
+            courseDropdown.add(option);
+
+        });
+    }
+}
+</script>
+</body>
+</html>
